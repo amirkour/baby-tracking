@@ -6,8 +6,19 @@ require 'logger'
 
 set :haml, :format => :html5
 
+#
 # TODO - the web server prolly shouldn't be webrick out on prod ...
+#
 # see this article: https://devcenter.heroku.com/articles/ruby-default-web-server
+#
+
+#
+# TODO - for DB/AR access, use this, or something like it:
+# require 'active_record'
+# ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
+#
+# see this article for AR in rack apps: https://devcenter.heroku.com/articles/rack
+#
 
 # TODO - edit connection string here ..?
 # TODO - log-file settings, like rolling and size restrictions ..?
