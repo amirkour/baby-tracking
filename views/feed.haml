@@ -19,31 +19,36 @@
             %br
     %h4{:'v-else' => true} No Previous Sessions
 
+.bootstrapped-stuff{:style => 'display:none;'}
+    :javascript
+        // HERE'S ONE WAY TO BOOTSTRAP SOME DATA TO THE PAGE ...
+        // window.my_app.sessions = JSON.parse( '\\#{sessions.to_json}' );
 
 :javascript
     (function(document,undefined){
         document.addEventListener('DOMContentLoaded', function(){ 
             var Vue = window.Vue,
-                axios = window.Axios;
+                axios = window.axios;
 
             var app = new Vue({
                 el: "#app",
                 data: {
-                    sessions: [
-                        {
-                            start: "10:30",
-                            end: '10:40',
-                            duration: "20m",
-                            notes: 'breast, left'
-                        },
-                        {
-                            start: "10:50",
-                            end: "11:00",
-                            duration: "10m",
-                            notes: 'breast, right'
-                        }
-                    ],
+                    sessions: JSON.parse( '\\#{sessions.to_json}' ),
                     title: "FEED TEH BEH BEH!!!"
+                },
+                mounted: function(){
+                    //
+                    // THIS IS ONE WAY TO DO IT ...
+                    // OR YOU CAN BOOTSTRAP THE DATA TO THE PAGE, AS I'VE DONE 
+                    // IN data.sessions
+                    //
+
+                    // var self = this;
+                    // axios.get("/api/v1/stuff").then(function(response){
+                    //     self.sessions = response.data;
+                    // }).catch(function(err){
+                    //     console.log("trying to get stuff gave this error: " + err);
+                    // });
                 }
             });
 

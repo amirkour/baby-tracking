@@ -38,8 +38,8 @@ configure :production do
     settings.logger.error("Woah, prod enabled!?")
 end
 
-get '/api/v1/stuff' do
-    json [{
+def foober
+    [{
         :start => '10:30',
         :end => '10:32',
         :duration => '2m',
@@ -52,6 +52,10 @@ get '/api/v1/stuff' do
     }]
 end
 
+get '/api/v1/stuff' do
+    json foober
+end
+
 # TODO - these routes should probably be something
 # like /baby/:id/feed/:id
 get '/feed/:id' do
@@ -61,7 +65,7 @@ end
 # TODO - these routes should probably be something
 # like /baby/:id/feed/:id
 get '/feed' do
-    haml :feed
+    haml :feed, :locals => {:sessions => foober}
 end
 
 get '/' do
