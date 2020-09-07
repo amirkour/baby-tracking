@@ -2,6 +2,7 @@ require 'sinatra'
 require 'haml'
 require "sinatra/reloader"
 require 'sinatra/custom_logger'
+require "sinatra/json"
 require 'logger'
 
 set :haml, :format => :html5
@@ -32,10 +33,24 @@ configure :production do
     set :logger, Logger.new(STDOUT)
 
     # TODO - change this in actual prod - i'm testing for now
+    #        but it should be a logging service w/ appropriate level
     settings.logger.level = Logger::WARN
     settings.logger.error("Woah, prod enabled!?")
 end
 
+get '/api/v1/stuff' do
+    json [{
+        :start => '10:30',
+        :end => '10:32',
+        :duration => '2m',
+        :notes => 'blabla'
+    },{
+        :start => '11:00',
+        :end => '11:30',
+        :duration => '30m',
+        :notes => 'long feed!?'
+    }]
+end
 
 # TODO - these routes should probably be something
 # like /baby/:id/feed/:id

@@ -1,3 +1,51 @@
 = haml :_nav
-%h3.text-center FEED TEH BEH BEH!!!
-word
+#app
+    %h3.text-center {{ title }}
+    .asdfasdf{:'v-if' => 'sessions && sessions.length > 0'} 
+        %h4 Feed Sessions
+        .session-details{:'v-for' => 'session in sessions'}
+            .row
+                .col-sm Start
+                .col-sm {{ session.start }}
+            .row
+                .col-sm End
+                .col-sm {{ session.end }}
+            .row
+                .col-sm Duration
+                .col-sm {{ session.duration }}
+            .row
+                .col-sm Notes
+                .col-sm {{ session.notes }}
+            %br
+    %h4{:'v-else' => true} No Previous Sessions
+
+
+:javascript
+    (function(document,undefined){
+        document.addEventListener('DOMContentLoaded', function(){ 
+            var Vue = window.Vue,
+                axios = window.Axios;
+
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    sessions: [
+                        {
+                            start: "10:30",
+                            end: '10:40',
+                            duration: "20m",
+                            notes: 'breast, left'
+                        },
+                        {
+                            start: "10:50",
+                            end: "11:00",
+                            duration: "10m",
+                            notes: 'breast, right'
+                        }
+                    ],
+                    title: "FEED TEH BEH BEH!!!"
+                }
+            });
+
+        }, false);
+    })(document);

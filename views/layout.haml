@@ -9,3 +9,9 @@
     %body
         .container
             = yield
+
+        %script{:src => '/javascript/axios-0.20.0.min.js'}
+        - if settings.development?
+            %script{:src => '/javascript/vue-2.6.12.js'}
+        - else
+            %script{:src => '/javascript/vue-2.6.12.min.js'}
